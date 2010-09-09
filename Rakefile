@@ -124,11 +124,8 @@ task :gemspec => :validate do
     sort.
     reject { |file| file =~ /^\./ }.
     reject { |file| file =~ /^(rdoc|pkg|src)/ }.
-    reject { |file| file =~ /tomcat-core.jar/ }.
     map { |file| "    #{file}" }.
     join("\n")
-
-  files << "\n    trinidad-libs/trinidad-daemon-extension.jar"
 
   # piece file back together and write
   manifest = "  s.files = %w[\n#{files}\n  ]\n"
