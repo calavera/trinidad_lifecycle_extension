@@ -1,0 +1,67 @@
+Trinidad lifecycle extension
+============================
+
+This extension allows you to add lifecycle listeners written in ruby to the
+Trinidad's server context as well as each application context that runs on top
+of Trinidad.
+
+
+[WARNING] This extension is completely experimental and has not been tested nor
+published yet.
+
+
+Configuration
+=============
+
+Add this extension into the Trinidad's configuration file and include the path
+to the directory where the listeners are. For instance:
+
+extensions:
+  lifecycle:
+    path: 'lib/lifecycle'
+
+Trinidad will try to load each class into that directory and add it to the
+approrpiated context regarding where the extension will be configured, into the
+server section or into the web_app section.
+
+
+How to write a lifecycle listener
+=================================
+
+If the listener is for the server the class must be into the module
+Trinidad::Lyfecycle::Server but if it's for the web application it must be into
+the module Trinidad::Lyfecycle::WebApp. The class must include the java class
+LifecycleListener and must contain the method `lifecycleEvent(event)`. For
+example:
+
+module Trinidad
+  module Lifecycle
+    module WebApp
+      import org.apache.catalina.LifecycleListener
+      import org.apache.catalina.Lifecycle
+
+      class WebAppListener
+        include LifecycleListener
+
+        def lifecycleEvent(event)
+          if Lifecycle::BEFORE_START_EVENT == event.type
+            # do something before start the web application context
+          end
+        end
+      end
+    end
+  end
+end
+
+As a reference, Trinidad is configured with a lifecycle listener, here is the
+code:
+
+http://github.com/calavera/trinidad/blob/master/lib/trinidad/web_app_lifecycle_listener.rb
+
+You should also be familiar with the Tomcat's life cycle:
+
+http://svn.apache.org/viewvc/tomcat/trunk/java/org/apache/catalina/Lifecycle.java?view=markup
+
+== Copyright
+
+Copyright (c) 2010 David Calavera<calavera@apache.org>. See LICENSE for details.
