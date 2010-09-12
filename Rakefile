@@ -96,11 +96,11 @@ task :release do
   sh "git commit --allow-empty -a -m 'Release #{version}'"
   sh "git tag v#{version}"
   sh "git push origin master"
-  sh "git push v#{version}"
+  sh "git push --tags"
   sh "gem push pkg/#{name}-#{version}.gem"
 end
 
-task :build => ['ant:build', 'gemspec'] do
+task :build => :gemspec do
   sh "mkdir -p pkg"
   sh "gem build #{gemspec_file}"
   sh "mv #{gem_file} pkg"
