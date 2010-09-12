@@ -6,10 +6,6 @@ Trinidad's server context as well as each application context that runs on top
 of Trinidad.
 
 
-[WARNING] This extension is completely experimental and has not been tested nor
-published yet.
-
-
 Configuration
 =============
 
