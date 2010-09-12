@@ -1,3 +1,7 @@
+require 'rubygems'
+gem 'trinidad_jars'
+require 'trinidad/extensions'
+
 module Trinidad
   module Extensions
     module Lifecycle
@@ -8,12 +12,17 @@ module Trinidad
           load listener
         end
 
-        if Object.const_defined? mod_name
-          mod = Object.const_get(mod_name)
-          mod.constants.each do |listener|
-            context.add_lifecycle_listener(mod.const_get(listener).new)
-          end
+        mod = constantize(mod_name)
+
+        mod.constants.each do |listener|
+          const_listener = mod.const_get(listener)
+          context.add_lifecycle_listener(const_listener.new)
         end
+      end
+
+      def constantize(mod)
+        names = mod.split('::')
+        names.inject(Object) {|constant, obj| constant.const_get(obj) }
       end
     end
 
