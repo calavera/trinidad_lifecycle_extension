@@ -88,7 +88,7 @@ end
 #
 #############################################################################
 
-task :release => :build do
+task :release do
   unless `git branch` =~ /^\* master$/
     puts "You must be on the master branch to release!"
     exit!
