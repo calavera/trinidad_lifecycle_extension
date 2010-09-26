@@ -5,6 +5,10 @@ This extension allows you to add lifecycle listeners written in ruby to the
 Trinidad's server context as well as each application context that runs on top
 of Trinidad.
 
+This extension also allows to enable the jmx monitoring capabilities of Tomcat.
+The configuration that Tomcat needs can be set as JAVA_OPTS properties or
+through the Trinidad's configuration file.
+
 
 Configuration
 =============
@@ -20,20 +24,24 @@ Trinidad will try to load each class into that directory and add it to the
 approrpiated context regarding where the extension will be configured, into the
 server section or into the web_app section.
 
-This extension also allows to enable the jmx monitoring capabilities of Tomcat.
-The configuration that Tomcat needs can be set as JAVA_OPTS properties or
-through the Trinidad's configuration file:
+JMX monitoring
+==============
+
+To enable the JMX monitoring just the key `jmx` is needed under the lifecycle
+extension, bellow there is the list of the available options that can be
+configured:
 
 extensions:
   lifecycle:
     jmx:
       port: 9000 # not required, 8181 by default
       authenticate: true # not required, false by default
-      ssl_enabled: #not required
-      ssl_cypher_suites: #not required
+      ssl_enabled: # not required
+      ssl_protocols: # not required
+      ssl_cypher_suites: # not required
       ssl_auth: # not required
       password_file: # not required
-      access_file: #not required
+      access_file: # not required
 
 See the Tomcat's documention for a complete references of the options:
 
