@@ -18,6 +18,29 @@ describe 'Trinidad lifecycle extension' do
       subject.configure(@tomcat)
       @tomcat.server.findLifecycleListeners().should have(1).listener
     end
+
+    it "adds the jmx lifecycle listener when the jmx option is true" do
+      ext = Trinidad::Extensions::LifecycleServerExtension.new({:jmx => nil})
+      ext.configure(@tomcat)
+      @tomcat.server.findLifecycleListeners().should have(1).listener
+    end
+
+    it "exports jmx option when is enabled" do
+      ext = Trinidad::Extensions::LifecycleServerExtension.new({:jmx => nil})
+      ext.configure(@tomcat)
+
+      java.lang.System.get_property("com.sun.management.jmxremote").should == 'true'
+      java.lang.System.get_property("com.sun.management.jmxremote.port").should == '8181'
+    end
+
+    it "exports custom jmx option when it exists" do
+      ext = Trinidad::Extensions::LifecycleServerExtension.new({
+        :jmx => {:ssl_enabled => 'true'}
+      })
+      ext.configure(@tomcat)
+
+      java.lang.System.get_property("com.sun.management.jmxremote.ssl").should == 'true'
+    end
   end
 
   context "when it's a webapp extension" do
