@@ -5,7 +5,7 @@ require 'trinidad/extensions'
 module Trinidad
   module Extensions
     module Lifecycle
-      VERSION = '0.1.0'
+      VERSION = '0.2.0'
 
       DEFAULT_JMX_OPTIONS = {
         :port => '8181',
