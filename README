@@ -59,14 +59,11 @@ example:
 module Trinidad
   module Lifecycle
     module WebApp
-      import org.apache.catalina.LifecycleListener
-      import org.apache.catalina.Lifecycle
-
       class WebAppListener
-        include LifecycleListener
+        include Trinidad::Tomcat::LifecycleListener
 
         def lifecycleEvent(event)
-          if Lifecycle::BEFORE_START_EVENT == event.type
+          if Trinidad::Tomcat::Lifecycle::BEFORE_START_EVENT == event.type
             # do something before start the web application context
           end
         end
