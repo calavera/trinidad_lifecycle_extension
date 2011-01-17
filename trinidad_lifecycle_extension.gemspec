@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'trinidad_lifecycle_extension'
-  s.version           = '0.2.0'
+  s.version           = '0.2.1'
   s.date              = '2011-01-17'
   s.rubyforge_project = 'trinidad_lifecycle_extension'
 
@@ -51,6 +51,7 @@ Gem::Specification.new do |s|
   ## THE MANIFEST COMMENTS, they are used as delimiters by the task.
   # = MANIFEST =
   s.files = %w[
+    History.txt
     LICENSE
     README
     Rakefile
