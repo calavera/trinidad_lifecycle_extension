@@ -1,0 +1,5 @@
+== 0.2.1 (2011-01-17)
+
+* Remote jmx configuration that doesn't work, just export JVM properties instead.
+* Use lib/lifecycle as default path.
+* Fix error when there arent listeners to load.
