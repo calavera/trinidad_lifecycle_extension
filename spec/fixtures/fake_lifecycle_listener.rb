@@ -1,11 +1,9 @@
 module Trinidad
   module Lifecycle
-    import org.apache.catalina.LifecycleListener
-    import org.apache.catalina.Lifecycle
 
     module Server
       class FakeServerListener
-        include LifecycleListener
+        include Trinidad::Tomcat::LifecycleListener
 
         def lifecycleEvent(event)
         end
@@ -14,7 +12,7 @@ module Trinidad
 
     module WebApp
       class FakeWebAppListener
-        include LifecycleListener
+        include Trinidad::Tomcat::LifecycleListener
 
         def lifecycleEvent(event)
         end

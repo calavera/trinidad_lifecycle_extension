@@ -18,34 +18,11 @@ to the directory where the listeners are. For instance:
 
 extensions:
   lifecycle:
-    path: 'lib/lifecycle'
+    path: 'lib/lifecycle' # Path by default, not required
 
 Trinidad will try to load each class into that directory and add it to the
 approrpiated context regarding where the extension will be configured, into the
 server section or into the web_app section.
-
-JMX monitoring
-==============
-
-To enable the JMX monitoring just the key `jmx` is needed under the lifecycle
-extension, bellow there is the list of the available options that can be
-configured:
-
-extensions:
-  lifecycle:
-    jmx:
-      port: 9000 # not required, 8181 by default
-      authenticate: true # not required, false by default
-      ssl_enabled: # not required
-      ssl_protocols: # not required
-      ssl_cypher_suites: # not required
-      ssl_auth: # not required
-      password_file: # not required
-      access_file: # not required
-
-See the Tomcat's documention for a complete references of the options:
-
-  http://tomcat.apache.org/tomcat-6.0-doc/monitoring.html
 
 How to write a lifecycle listener
 =================================
