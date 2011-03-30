@@ -28,8 +28,8 @@ How to write a lifecycle listener
 =================================
 
 If the listener is for the server the class must be into the module
-Trinidad::Lyfecycle::Server but if it's for the web application it must be into
-the module Trinidad::Lyfecycle::WebApp. The class must include the java class
+Trinidad::Lifecycle::Server but if it's for the web application it must be into
+the module Trinidad::Lifecycle::WebApp. The class must include the java class
 LifecycleListener and must contain the method `lifecycleEvent(event)`. For
 example:
 
