@@ -28,6 +28,11 @@ module Trinidad
         names = mod.split('::')
         names.inject(Object) {|constant, obj| constant.const_get(obj) } rescue nil
       end
+
+      def trap_signals(tomcat)
+        trap('INT') { tomcat.stop }
+        trap('TERM') { tomcat.stop }
+      end
     end
 
 
@@ -35,6 +40,7 @@ module Trinidad
       include Lifecycle
 
       def configure(tomcat)
+        trap_signals(tomcat)
         init_listeners(tomcat.server, @options[:path], 'Trinidad::Lifecycle::Server')
       end
     end
@@ -43,7 +49,15 @@ module Trinidad
       include Lifecycle
 
       def configure(tomcat, app_context)
+        trap_signals(tomcat)
         init_listeners(app_context, @options[:path], 'Trinidad::Lifecycle::WebApp')
+      end
+    end
+
+    class LifecycleOptionsExtension < OptionsExtension
+      def configure(parser, default_options)
+        default_options[:extensions] ||= {}
+        default_options[:extensions][:lifecycle] = {}
       end
     end
   end
