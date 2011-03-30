@@ -6,7 +6,7 @@ require 'java'
 module Trinidad
   module Extensions
     module Lifecycle
-      VERSION = '0.2.1'
+      VERSION = '0.2.2'
 
       def init_listeners(context, path, mod_name)
         path ||= File.join('lib', 'lifecycle')
